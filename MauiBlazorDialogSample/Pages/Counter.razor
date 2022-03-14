@@ -1,0 +1,19 @@
+﻿@page "/counter"
+@inject IDialogService DialogService
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+	private int currentCount = 0;
+
+	private async void IncrementCount()
+	{
+		currentCount++;
+		var result = await DialogService.DisplayConfirm("The count is now...", $"Count: {currentCount} is that OK?",
+		"OK", "Give me another number");
+	}
+}
